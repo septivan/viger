@@ -12,7 +12,7 @@ test("a visitor can search the catalog and open a game", async ({ page }) => {
 
 test("catalog filters and ordering are reflected in visible card values", async ({ page }) => {
   await page.goto("/");
-  await page.getByLabel("Platform").selectOption("Mobile");
+  await page.getByLabel("Platform", { exact: true }).selectOption("Mobile");
 
   const cards = page.locator(".game-card");
   await expect(cards.first()).toContainText("Mobile");
