@@ -20,7 +20,10 @@ test("catalog filters and ordering are reflected in visible card values", async 
     expect(text).toContain("Mobile");
   }
 
-  await page.getByLabel("Sort by").selectOption("newest");
+  await Promise.all([
+    page.waitForResponse((response) => response.url().includes("sort=newest") && response.ok()),
+    page.getByLabel("Sort by").selectOption("newest"),
+  ]);
   const years = (await cards.allTextContents()).map((text) => {
     const year = text.match(/\b20\d{2}\b/)?.[0];
     expect(year).toBeDefined();
@@ -28,8 +31,10 @@ test("catalog filters and ordering are reflected in visible card values", async 
   });
   expect(years).toEqual([...years].sort((left, right) => right - left));
 
-  await page.getByLabel("Sort by").selectOption("reviews_desc");
-  await expect(page).toHaveURL(/sort=reviews_desc/);
+  await Promise.all([
+    page.waitForResponse((response) => response.url().includes("sort=reviews_desc") && response.ok()),
+    page.getByLabel("Sort by").selectOption("reviews_desc"),
+  ]);
   const reviewCounts = (await cards.allTextContents()).map((text) => {
     const count = text.match(/(\d+) reviews?/)?.[1];
     expect(count).toBeDefined();
