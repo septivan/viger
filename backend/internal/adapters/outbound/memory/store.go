@@ -9,6 +9,7 @@ import (
 	review "github.com/septivan/viger/backend/internal/core/review/domain"
 )
 
+// Store implements both repository ports over one concurrency boundary.
 type Store struct {
 	mutex   sync.RWMutex
 	games   map[string]game.Game
@@ -16,6 +17,7 @@ type Store struct {
 	reviews map[string][]review.Review
 }
 
+// New builds a store only when seed relationships and identifiers are valid.
 func New(games []game.Game, reviews []review.Review) (*Store, error) {
 	store := &Store{
 		games:   make(map[string]game.Game, len(games)),

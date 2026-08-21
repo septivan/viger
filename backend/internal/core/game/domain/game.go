@@ -17,6 +17,7 @@ var (
 	ErrInvalidReleaseDate = errors.New("game release date is required")
 )
 
+// Game contains the validated catalog data used by the application core.
 type Game struct {
 	ID          string
 	Title       string
@@ -37,6 +38,7 @@ type NewGameInput struct {
 	ReleaseDate time.Time
 }
 
+// New normalizes and validates game data before it enters the core.
 func New(input NewGameInput) (Game, error) {
 	input.ID = strings.TrimSpace(input.ID)
 	input.Title = strings.TrimSpace(input.Title)

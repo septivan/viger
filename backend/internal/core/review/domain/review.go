@@ -18,6 +18,7 @@ var (
 	ErrControlCharacters   = errors.New("review fields contain unsupported control characters")
 )
 
+// Review contains a validated player rating and written opinion.
 type Review struct {
 	ID           string
 	GameID       string
@@ -36,6 +37,7 @@ type NewReviewInput struct {
 	CreatedAt    time.Time
 }
 
+// New normalizes and validates review data before it is stored or published.
 func New(input NewReviewInput) (Review, error) {
 	input.ID = strings.TrimSpace(input.ID)
 	input.GameID = strings.TrimSpace(input.GameID)

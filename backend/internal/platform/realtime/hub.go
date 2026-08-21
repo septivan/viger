@@ -16,6 +16,7 @@ import (
 
 var ErrConnectionLimit = errors.New("WebSocket connection limit reached")
 
+// Hub broadcasts review notifications; REST remains the authoritative data source.
 type Hub struct {
 	mutex          sync.RWMutex
 	clients        map[*client]struct{}
@@ -44,6 +45,7 @@ type ReviewPayload struct {
 	CreatedAt    time.Time `json:"createdAt"`
 }
 
+// NewHub creates an origin-restricted, connection-bounded WebSocket hub.
 func NewHub(allowedOrigins []string, maximumClients int, metrics *observability.Metrics) *Hub {
 	origins := make(map[string]struct{}, len(allowedOrigins))
 	for _, origin := range allowedOrigins {

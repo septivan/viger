@@ -23,11 +23,13 @@ var (
 	ErrInvalidReviewSort = errors.New("unsupported review sort")
 )
 
+// Service owns catalog and game-detail read use cases.
 type Service struct {
 	games   gameports.Repository
 	reviews reviewport.Repository
 }
 
+// New creates a catalog service backed only by core repository ports.
 func New(games gameports.Repository, reviews reviewport.Repository) Service {
 	return Service{games: games, reviews: reviews}
 }

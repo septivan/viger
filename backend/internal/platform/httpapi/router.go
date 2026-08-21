@@ -19,6 +19,7 @@ import (
 
 const maximumReviewBody = 16 << 10
 
+// Settings contains the explicit dependencies required by the HTTP adapter.
 type Settings struct {
 	Games            gameservices.Service
 	Reviews          reviewservices.Service
@@ -35,6 +36,7 @@ type api struct {
 	limiter  *rateLimiter
 }
 
+// NewRouter maps REST endpoints to application services and shared middleware.
 func NewRouter(settings Settings) http.Handler {
 	server := &api{settings: settings, limiter: newRateLimiter(settings.ReviewRateLimit, settings.ReviewRateWindow)}
 	mux := http.NewServeMux()

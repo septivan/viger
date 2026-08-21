@@ -15,14 +15,17 @@ import (
 
 var ErrGameNotFound = errors.New("game not found")
 
+// Clock keeps review creation deterministic in tests.
 type Clock interface {
 	Now() time.Time
 }
 
+// IDGenerator supplies storage-independent review identifiers.
 type IDGenerator interface {
 	NewID() (string, error)
 }
 
+// Service owns the review creation use case.
 type Service struct {
 	games   gameports.Repository
 	reviews ports.Repository
@@ -31,6 +34,7 @@ type Service struct {
 	ids     IDGenerator
 }
 
+// New wires review creation to its required core ports.
 func New(games gameports.Repository, reviews ports.Repository, events ports.EventPublisher, clock Clock, ids IDGenerator) Service {
 	return Service{games: games, reviews: reviews, events: events, clock: clock, ids: ids}
 }
@@ -42,6 +46,7 @@ type CreateInput struct {
 	Text         string
 }
 
+// Create validates the game relationship, stores the review, then publishes it.
 func (service Service) Create(context context.Context, input CreateInput) (domain.Review, error) {
 	if _, found, err := service.games.FindByID(context, input.GameID); err != nil {
 		return domain.Review{}, err
