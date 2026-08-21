@@ -9,7 +9,7 @@ describe("GameCard", () => {
       title: "Signal Drift",
       description: "A test game description.",
       genre: "Adventure",
-      platforms: ["PC", "PlayStation 5"],
+      platforms: ["PC", "PlayStation 5", "Mobile"],
       developer: "Northstar Works",
       releaseDate: "2025-04-18T00:00:00Z",
       averageRating: 4.4,
@@ -17,7 +17,7 @@ describe("GameCard", () => {
       ratingDistribution: { "1": 0, "2": 0, "3": 2, "4": 3, "5": 7 },
     }} />);
 
-    expect(screen.getByText("PC · PlayStation 5")).toBeInTheDocument();
+    expect(screen.getByText("PC · PlayStation 5 · Mobile")).toBeInTheDocument();
     expect(screen.getByText("2025")).toBeInTheDocument();
     expect(screen.queryByText("Platforms")).not.toBeInTheDocument();
     expect(screen.queryByText("Released")).not.toBeInTheDocument();

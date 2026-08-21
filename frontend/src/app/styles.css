@@ -97,8 +97,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .game-card-body { align-items: start; display: flex; gap: 12px; justify-content: space-between; padding: 18px 4px 10px; }
 .game-card-body h3 { font-family: var(--font-display), sans-serif; font-size: 1.12rem; letter-spacing: -.035em; line-height: 1.15; margin: 0; }
 .game-card-copy { min-width: 0; }
-.game-card-facts { color: #777780; display: flex; font-size: .66rem; font-weight: 700; gap: 7px; letter-spacing: .04em; margin: 9px 0 0; overflow: hidden; text-transform: uppercase; white-space: nowrap; }
-.game-card-facts span:first-child { overflow: hidden; text-overflow: ellipsis; }
+.game-card-facts { color: #777780; display: flex; font-size: .66rem; font-weight: 700; gap: 7px; letter-spacing: .04em; line-height: 1.45; margin: 9px 0 0; text-transform: uppercase; }
+.game-card-facts span:first-child { min-width: 0; }
 .rating { align-items: baseline; display: inline-flex; gap: 7px; }
 .rating > span, .review-rating > span { color: #f2c94c; }
 .rating strong { font-family: var(--font-display), sans-serif; font-size: 1.35rem; }

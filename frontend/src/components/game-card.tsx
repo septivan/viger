@@ -17,7 +17,7 @@ export function GameCard({ game }: { game: Game }) {
           <div className="game-card-copy">
             <h3>{game.title}</h3>
             <p className="game-card-facts">
-              <span>{game.platforms.slice(0, 2).join(" · ")}</span>
+              <span>{game.platforms.join(" · ")}</span>
               <span aria-hidden="true">/</span>
               <time dateTime={game.releaseDate}>{releaseYear}</time>
             </p>
