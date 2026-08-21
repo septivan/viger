@@ -53,9 +53,9 @@ export function Catalog() {
       </div>
       <div className="catalog-controls">
         <label className="search-field"><span className="sr-only">Search games</span><span aria-hidden="true">⌕</span><input onChange={(event) => setSearch(event.target.value)} placeholder="Search by title…" type="search" value={search} /></label>
-        <label><span>Genre</span><select onChange={(event) => updateParameters({ genre: event.target.value, page: 1 })} value={query.genre ?? ""}>{genres.map((genre) => <option key={genre || "all"} value={genre}>{genre || "All genres"}</option>)}</select></label>
-        <label><span>Platform</span><select onChange={(event) => updateParameters({ platform: event.target.value, page: 1 })} value={query.platform ?? ""}>{platforms.map((platform) => <option key={platform || "all"} value={platform}>{platform || "All platforms"}</option>)}</select></label>
-        <label><span>Sort by</span><select onChange={(event) => updateParameters({ sort: event.target.value, page: 1 })} value={query.sort}><option value="rating_desc">Top rated</option><option value="reviews_desc">Most discussed</option><option value="newest">Newest releases</option><option value="title_asc">Title A–Z</option></select></label>
+        <label><span>Genre</span><select aria-label="Genre" onChange={(event) => updateParameters({ genre: event.target.value, page: 1 })} value={query.genre ?? ""}>{genres.map((genre) => <option key={genre || "all"} value={genre}>{genre || "All genres"}</option>)}</select></label>
+        <label><span>Platform</span><select aria-label="Platform" onChange={(event) => updateParameters({ platform: event.target.value, page: 1 })} value={query.platform ?? ""}>{platforms.map((platform) => <option key={platform || "all"} value={platform}>{platform || "All platforms"}</option>)}</select></label>
+        <label><span>Sort by</span><select aria-label="Sort by" onChange={(event) => updateParameters({ sort: event.target.value, page: 1 })} value={query.sort}><option value="rating_desc">Top rated</option><option value="reviews_desc">Most discussed</option><option value="newest">Newest releases</option><option value="title_asc">Title A–Z</option></select></label>
       </div>
       {games.isPending && <div className="game-grid" aria-label="Loading games">{Array.from({ length: 8 }, (_, index) => <div className="skeleton game-card-skeleton" key={index} />)}</div>}
       {games.isError && <div className="state-panel" role="alert"><span>Connection lost</span><h3>The collection could not be loaded.</h3><p>{games.error instanceof Error ? games.error.message : "Try again in a moment."}</p><button onClick={() => games.refetch()} type="button">Try again</button></div>}
@@ -64,4 +64,3 @@ export function Catalog() {
     </section>
   );
 }
-
