@@ -2,6 +2,8 @@
 
 GOCACHE ?= /tmp/viger-go-cache
 export GOCACHE
+GOMODCACHE ?= /tmp/viger-go-mod
+export GOMODCACHE
 
 fmt:
 	gofmt -w ./cmd ./internal

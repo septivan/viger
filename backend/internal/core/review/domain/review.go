@@ -86,4 +86,3 @@ func containsUnsupportedControl(value string, allowWhitespace bool) bool {
 	}
 	return false
 }
-

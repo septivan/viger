@@ -68,4 +68,3 @@ func TestListReviewsReturnsNewestFirst(t *testing.T) {
 		t.Fatalf("reviews are not newest first: %#v", page.Items)
 	}
 }
-

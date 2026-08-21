@@ -85,4 +85,3 @@ func New(input NewGameInput) (Game, error) {
 		ReleaseDate: input.ReleaseDate.UTC(),
 	}, nil
 }
-

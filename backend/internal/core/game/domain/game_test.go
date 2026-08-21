@@ -32,4 +32,3 @@ func TestNewGameValidatesRequiredFields(t *testing.T) {
 		})
 	}
 }
-

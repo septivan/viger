@@ -78,4 +78,3 @@ func cloneGame(item game.Game) game.Game {
 	item.Platforms = append([]string(nil), item.Platforms...)
 	return item
 }
-

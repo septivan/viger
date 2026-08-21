@@ -14,4 +14,3 @@ type Repository interface {
 type EventPublisher interface {
 	PublishReviewCreated(context.Context, domain.Review) error
 }
-

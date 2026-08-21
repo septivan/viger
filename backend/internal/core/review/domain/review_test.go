@@ -53,4 +53,3 @@ func TestNewReviewTrimsAndNormalizesTime(t *testing.T) {
 		t.Fatalf("created time location = %v, want UTC", review.CreatedAt.Location())
 	}
 }
-

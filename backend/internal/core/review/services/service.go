@@ -24,11 +24,11 @@ type IDGenerator interface {
 }
 
 type Service struct {
-	games     gameports.Repository
-	reviews   ports.Repository
-	events    ports.EventPublisher
-	clock     Clock
-	ids       IDGenerator
+	games   gameports.Repository
+	reviews ports.Repository
+	events  ports.EventPublisher
+	clock   Clock
+	ids     IDGenerator
 }
 
 func New(games gameports.Repository, reviews ports.Repository, events ports.EventPublisher, clock Clock, ids IDGenerator) Service {
@@ -83,4 +83,3 @@ func (RandomIDGenerator) NewID() (string, error) {
 	}
 	return "review-" + hex.EncodeToString(value), nil
 }
-
