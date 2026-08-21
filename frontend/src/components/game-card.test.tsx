@@ -19,6 +19,7 @@ describe("GameCard", () => {
 
     expect(screen.getByText("PC · PlayStation 5 · Mobile")).toBeInTheDocument();
     expect(screen.getByText("2025")).toBeInTheDocument();
+    expect(screen.getByText("12 reviews")).toBeVisible();
     expect(screen.queryByText("Platforms")).not.toBeInTheDocument();
     expect(screen.queryByText("Released")).not.toBeInTheDocument();
   });

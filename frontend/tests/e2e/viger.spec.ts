@@ -27,6 +27,15 @@ test("catalog filters and ordering are reflected in visible card values", async 
     return Number(year);
   });
   expect(years).toEqual([...years].sort((left, right) => right - left));
+
+  await page.getByLabel("Sort by").selectOption("reviews_desc");
+  await expect(page).toHaveURL(/sort=reviews_desc/);
+  const reviewCounts = (await cards.allTextContents()).map((text) => {
+    const count = text.match(/(\d+) reviews?/)?.[1];
+    expect(count).toBeDefined();
+    return Number(count);
+  });
+  expect(reviewCounts).toEqual([...reviewCounts].sort((left, right) => right - left));
 });
 
 test("a new review appears immediately in another browser", async ({ browser }) => {
