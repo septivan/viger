@@ -6,8 +6,8 @@ This file is the primary project-specific instruction source for every AI agent 
 
 1. The current user request, when safe and authorized.
 2. This `AGENTS.md` and accepted Viger documentation.
-3. The AI workspace foundation in `/home/septi/.ai` when available.
-4. Relevant capabilities, playbooks, knowledge, and general engineering practices.
+3. Repository-local conventions and established implementation patterns.
+4. Relevant general engineering practices.
 
 Explain material conflicts instead of resolving them silently.
 
@@ -34,7 +34,7 @@ Do not expand this scope without explicit user approval.
 ## Architecture
 
 - Keep the frontend and backend as separate components in one monorepo.
-- Organize the Go backend using grouped hexagonal architecture under `internal/core`, `internal/adapters`, and `internal/platform`, following the dependency direction demonstrated by Nestori.
+- Organize the Go backend using grouped hexagonal architecture under `internal/core`, `internal/adapters`, and `internal/platform`.
 - Keep `Game` and `Review` as separate domain models.
 - Domain and application code must not depend on HTTP, WebSocket, or the in-memory adapter.
 - REST is the source of truth. WebSocket is a notification channel for newly created reviews.
@@ -62,4 +62,3 @@ Before declaring work complete, run the repository-prescribed formatting, lintin
 - Use small, logical, reviewable commits with concise English intent-based messages.
 - Do not commit secrets, local configuration, build output, test artifacts, or unrelated changes.
 - Review each diff and verification result before committing.
-

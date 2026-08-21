@@ -11,8 +11,8 @@ flowchart LR
     Browser[Browser] -->|REST :8080| API[Go API]
     Browser <-->|WebSocket :8080| Hub[Realtime hub]
     Browser -->|HTML and assets :3000| Web[Next.js frontend]
-    API --> GameService[Game services]
-    API --> ReviewService[Review services]
+    API --> GameService[Game catalog service]
+    API --> ReviewService[Review creation service]
     ReviewService -->|review.created| Hub
     GameService --> Store[Thread-safe memory adapter]
     ReviewService --> Store
@@ -36,6 +36,8 @@ core/game and core/review
 ```
 
 The core does not import HTTP, WebSocket, JSON, or the memory adapter. HTTP handlers translate transport input and output. Services coordinate use cases and domain construction. The memory adapter implements repository ports and owns synchronization.
+
+“Separate services” means separate application responsibilities and dependency boundaries, not separate deployable processes. Catalog reads, including reading a game's reviews, live in `core/game/services/service.go`. Review creation lives in `core/review/services/service.go`. Game and Review also have separate domain models and repository ports. The single in-memory store implements both repository ports in one adapter because all data shares the same process lifetime and synchronization boundary.
 
 The service interfaces are deliberately small. `Clock` and `IDGenerator` ports exist because time and random IDs otherwise make review use-case tests nondeterministic. No generic repository or dependency-injection framework is used.
 
@@ -97,4 +99,3 @@ No cookie or bearer authentication exists, so CSRF and authorization are outside
 ## Scaling path
 
 The exercise runs one backend process. A production evolution would replace the memory adapter with durable storage and connect review creation to a transactional event/outbox path. A shared pub/sub system would distribute events across replicas. Those changes fit behind existing repository and event publisher ports; they are intentionally not implemented here.
-
