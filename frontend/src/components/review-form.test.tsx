@@ -27,6 +27,11 @@ describe("ReviewForm", () => {
     expect(createReview).not.toHaveBeenCalled();
   });
 
+  it("orders rating choices from one to five from left to right", () => {
+    render(<ReviewForm gameID="game-1" gameTitle="Hades" />, { wrapper });
+    expect(screen.getAllByRole("radio").map((radio) => radio.getAttribute("value"))).toEqual(["1", "2", "3", "4", "5"]);
+  });
+
   it("submits a valid review and reports success", async () => {
     createReview.mockResolvedValue({ id: "review-1" });
     render(<ReviewForm gameID="game-1" gameTitle="Hades" />, { wrapper });
@@ -38,4 +43,3 @@ describe("ReviewForm", () => {
     expect(await screen.findByRole("status")).toHaveTextContent("now part of the conversation");
   });
 });
-

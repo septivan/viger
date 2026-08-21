@@ -174,11 +174,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .review-form-panel > p:not(.eyebrow) { color: var(--muted); font-size: .84rem; line-height: 1.6; margin-bottom: 30px; }
 .review-form-panel fieldset { border: 0; margin: 0 0 22px; padding: 0; }
 .review-form-panel legend, .form-field > span { color: #d5d6da; display: block; font-size: .72rem; font-weight: 700; margin-bottom: 9px; }
-.star-input { display: flex; flex-direction: row-reverse; justify-content: flex-end; }
+.star-input { display: flex; }
 .star-input label { cursor: pointer; position: relative; }
 .star-input input { cursor: pointer; height: 100%; inset: 0 7px 0 0; opacity: 0; position: absolute; width: calc(100% - 7px); z-index: 2; }
 .star-input span[aria-hidden] { color: #444854; display: block; font-size: 1.8rem; padding-right: 7px; pointer-events: none; transition: color .15s, transform .15s; }
-.star-input label:hover span[aria-hidden], .star-input label:hover ~ label span[aria-hidden], .star-input input:checked ~ span[aria-hidden], .star-input label:has(input:checked) ~ label span[aria-hidden] { color: #f2c94c; transform: translateY(-2px); }
+.star-input label:hover span[aria-hidden], .star-input label.selected span[aria-hidden] { color: #f2c94c; transform: translateY(-2px); }
 .star-input input:focus-visible ~ span[aria-hidden] { outline: 3px solid var(--acid); outline-offset: 2px; }
 .form-field { display: block; margin-bottom: 19px; }
 .form-field input, .form-field textarea { background: #0f121a; border: 1px solid var(--line); border-radius: 11px; color: var(--text); padding: 13px 14px; resize: vertical; width: 100%; }

@@ -41,7 +41,11 @@ test("a new review appears immediately in another browser", async ({ browser }) 
   ]);
 
   const uniqueReview = `Realtime review ${Date.now()} with excellent pacing and responsive combat.`;
-  await author.getByRole("radio", { name: "5 out of 5" }).check();
+  const oneStar = author.getByRole("radio", { name: "1 out of 5" });
+  const fiveStars = author.getByRole("radio", { name: "5 out of 5" });
+  const [oneStarBox, fiveStarBox] = await Promise.all([oneStar.boundingBox(), fiveStars.boundingBox()]);
+  expect(oneStarBox?.x).toBeLessThan(fiveStarBox?.x ?? 0);
+  await fiveStars.check();
   await author.getByLabel("Your name").fill("Playwright Author");
   await author.getByLabel("Your review").fill(uniqueReview);
   await author.getByRole("button", { name: /Publish review/i }).click();

@@ -43,7 +43,17 @@ export function ReviewForm({ gameID, gameTitle }: { gameID: string; gameTitle: s
         <fieldset>
           <legend>Your rating</legend>
           <div className="star-input">
-            <Controller control={form.control} name="rating" render={({ field }) => <>{[1, 2, 3, 4, 5].map((rating) => <label key={rating}><input checked={field.value === rating} name={field.name} onBlur={field.onBlur} onChange={() => field.onChange(rating)} ref={field.ref} type="radio" value={rating} /><span aria-hidden="true">★</span><span className="sr-only">{rating} out of 5</span></label>)}</>} />
+            <Controller
+              control={form.control}
+              name="rating"
+              render={({ field }) => <>{[1, 2, 3, 4, 5].map((rating) => (
+                <label className={field.value >= rating ? "selected" : undefined} key={rating}>
+                  <input checked={field.value === rating} name={field.name} onBlur={field.onBlur} onChange={() => field.onChange(rating)} ref={field.ref} type="radio" value={rating} />
+                  <span aria-hidden="true">★</span>
+                  <span className="sr-only">{rating} out of 5</span>
+                </label>
+              ))}</>}
+            />
           </div>
           {form.formState.errors.rating && <p className="field-error">{form.formState.errors.rating.message}</p>}
         </fieldset>
