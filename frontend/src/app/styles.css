@@ -103,9 +103,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .rating > span, .review-rating > span { color: #f2c94c; }
 .rating strong { font-family: var(--font-display), sans-serif; font-size: 1.35rem; }
 .rating small { color: var(--muted); }
-.rating-compact { display: grid; flex-shrink: 0; gap: 1px 4px; grid-template-columns: auto auto; }
+.rating-compact { flex-shrink: 0; gap: 4px; }
 .rating-compact strong { font-size: .88rem; }
-.rating-compact small { font-size: .62rem; grid-column: 1 / -1; text-align: right; white-space: nowrap; }
+.rating-compact small { display: none; }
 .pagination { align-items: center; display: flex; gap: 12px; justify-content: center; margin: 58px auto 0; }
 .pagination button { background: transparent; border: 1px solid #c9c6bd; border-radius: 10px; color: #26272d; min-height: 42px; padding: 0 15px; }
 .pagination button:disabled { cursor: not-allowed; opacity: .35; }
