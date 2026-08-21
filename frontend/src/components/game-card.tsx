@@ -16,10 +16,11 @@ export function GameCard({ game }: { game: Game }) {
         <div className="game-card-body">
           <div className="game-card-copy">
             <h3>{game.title}</h3>
-            <dl className="game-card-facts">
-              <div><dt>Platforms</dt><dd>{game.platforms.slice(0, 2).join(", ")}</dd></div>
-              <div><dt>Released</dt><dd><time dateTime={game.releaseDate}>{releaseYear}</time></dd></div>
-            </dl>
+            <p className="game-card-facts">
+              <span>{game.platforms.slice(0, 2).join(" · ")}</span>
+              <span aria-hidden="true">/</span>
+              <time dateTime={game.releaseDate}>{releaseYear}</time>
+            </p>
           </div>
           <Rating value={game.averageRating} count={game.reviewCount} compact />
         </div>

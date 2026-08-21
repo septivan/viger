@@ -10,6 +10,25 @@ test("a visitor can search the catalog and open a game", async ({ page }) => {
   await expect(page.getByText("The conversation")).toBeVisible();
 });
 
+test("catalog filters and ordering are reflected in visible card values", async ({ page }) => {
+  await page.goto("/");
+  await page.getByLabel("Platform").selectOption("Mobile");
+
+  const cards = page.locator(".game-card");
+  await expect(cards.first()).toContainText("Mobile");
+  for (const text of await cards.allTextContents()) {
+    expect(text).toContain("Mobile");
+  }
+
+  await page.getByLabel("Sort by").selectOption("newest");
+  const years = (await cards.allTextContents()).map((text) => {
+    const year = text.match(/\b20\d{2}\b/)?.[0];
+    expect(year).toBeDefined();
+    return Number(year);
+  });
+  expect(years).toEqual([...years].sort((left, right) => right - left));
+});
+
 test("a new review appears immediately in another browser", async ({ browser }) => {
   const authorContext = await browser.newContext();
   const readerContext = await browser.newContext();
@@ -33,4 +52,3 @@ test("a new review appears immediately in another browser", async ({ browser }) 
   await authorContext.close();
   await readerContext.close();
 });
-

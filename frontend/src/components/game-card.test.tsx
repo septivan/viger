@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { GameCard } from "@/components/game-card";
 
 describe("GameCard", () => {
-  it("shows the platform and release year used to understand catalog results", () => {
+  it("shows values that explain platform and release ordering results", () => {
     render(<GameCard game={{
       id: "signal-drift",
       title: "Signal Drift",
@@ -17,9 +17,9 @@ describe("GameCard", () => {
       ratingDistribution: { "1": 0, "2": 0, "3": 2, "4": 3, "5": 7 },
     }} />);
 
-    expect(screen.getByText("Platforms")).toBeInTheDocument();
-    expect(screen.getByText("PC, PlayStation 5")).toBeInTheDocument();
-    expect(screen.getByText("Released")).toBeInTheDocument();
+    expect(screen.getByText("PC · PlayStation 5")).toBeInTheDocument();
     expect(screen.getByText("2025")).toBeInTheDocument();
+    expect(screen.queryByText("Platforms")).not.toBeInTheDocument();
+    expect(screen.queryByText("Released")).not.toBeInTheDocument();
   });
 });
