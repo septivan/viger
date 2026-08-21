@@ -35,12 +35,10 @@ test("catalog filters and ordering are reflected in visible card values", async 
     page.waitForResponse((response) => response.url().includes("sort=reviews_desc") && response.ok()),
     page.getByLabel("Sort by").selectOption("reviews_desc"),
   ]);
-  const reviewCounts = (await cards.allTextContents()).map((text) => {
-    const count = text.match(/(\d+) reviews?/)?.[1];
-    expect(count).toBeDefined();
-    return Number(count);
-  });
-  expect(reviewCounts).toEqual([...reviewCounts].sort((left, right) => right - left));
+  await expect.poll(async () => {
+    const reviewCounts = (await cards.allTextContents()).map((text) => Number(text.match(/(\d+) reviews?/)?.[1] ?? -1));
+    return reviewCounts.every((count, index) => count >= 0 && (index === 0 || reviewCounts[index - 1]! >= count));
+  }).toBe(true);
 });
 
 test("a new review appears immediately in another browser", async ({ browser }) => {
