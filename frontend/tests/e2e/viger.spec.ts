@@ -36,7 +36,7 @@ test("catalog filters and ordering are reflected in visible card values", async 
     page.getByLabel("Sort by").selectOption("reviews_desc"),
   ]);
   await expect.poll(async () => {
-    const reviewCounts = (await cards.allTextContents()).map((text) => Number(text.match(/(\d+) reviews?/)?.[1] ?? -1));
+    const reviewCounts = (await cards.locator(".rating-compact small").allTextContents()).map((text) => Number(text.match(/\d+/)?.[0] ?? -1));
     return reviewCounts.every((count, index) => count >= 0 && (index === 0 || reviewCounts[index - 1]! >= count));
   }).toBe(true);
 });
